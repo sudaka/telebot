@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block title %}Редактирование колоды{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Изменить колоду</h1>
+    <form action="" method="post">{% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">Изменить</button>
+        <a href="{% url 'pack_list' %}" class="btn btn-secondary ml-2">Отмена</a>
+        {% endbuttons %}
+    </form>
+{% else %}
+    <div class="container-fluid">
+        <div class="row bg-danger">Доступ к данной странице запрещен. Пожалуйста обратитесь к администратору для получения доступа.</div>
+    </div>
+{% endif %}
+{% endblock %}

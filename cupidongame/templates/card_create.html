@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block title %}Создать новую карту{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Создание новой карты</h1>
+    <form action="" method="post">{% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">Создать</button>
+        <a href="{% url 'card_list_all' %}" class="btn btn-secondary ml-2">Отмена</a>
+        {% endbuttons %}
+    </form>
+{% else %}
+    <div class="container-fluid">
+        <div class="row bg-danger">Доступ к данной странице запрещен. Пожалуйста обратитесь к администратору для получения доступа.</div>
+    </div>
+{% endif %}
+{% endblock %}

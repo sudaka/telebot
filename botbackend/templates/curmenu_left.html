@@ -1,0 +1,13 @@
+<div class="list-group list-group-light">
+    {% if user.is_authenticated %}
+        {% for curitem in leftmenu %}
+            {% if user.is_staff >= curitem.is_staff %}
+                <a href="{{ curitem.menulink }}" class="list-group-item list-group-item-action px-3 border-0" 
+                {% if curitem.newwindow %}
+                    target="_blank"
+                {% endif %}
+                >{{curitem.menutext}}</a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>

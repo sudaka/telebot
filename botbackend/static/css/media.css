@@ -1,0 +1,159 @@
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1300px) {
+
+	.first_screen_home h1{
+		font-size:4.3em;
+		padding:0.3em 0 0 0;
+		margin:0em;
+	}
+
+	.top_menu_container span, .top_menu_container a {
+		font-size:0.75em !important;
+	}
+
+}
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+	.first_screen_home h1{
+		font-size:4.3em;
+		padding:0.3em 0 0 0;
+		margin:0em;
+	}
+
+
+
+	.top_menu_container span, .top_menu_container a {
+		font-size:0.70em !important;
+	}
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+	button.navbar-toggler {
+		margin-top:0.7em;
+	}
+	.top_menu_container  .nav-link {
+		margin-top: 0.3em;
+		padding-top: 0.1em;
+		font-size: 1em !important;
+		font-weight: 600;
+	}
+	#mainMenu ul.navbar-nav {
+		text-align: left;
+		margin-top: 4.2em;
+		padding: 0.5em;
+		background-color: #ffffff;
+	}
+	.first_screen_home h1{
+		font-size:3.4em;
+		padding:1.2em 0 0 0;
+		margin:0em;
+	}
+
+	.top_menu_container span, .top_menu_container a {
+		font-size:0.75em !important;
+	}
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+	button.navbar-toggler {
+		margin-top:0.3em;
+	}
+	#mainMenu ul.navbar-nav {
+		text-align: left;
+		margin-top: 3.2em;
+		padding: 0.5em;
+		background-color: #ffffff;
+	}
+	#mainMenu ul.navbar-nav a.nav-link {
+		margin:0;
+		padding:0.1em 0;
+	}
+	.first_screen_home h1{
+		font-size:3.2em;
+		padding:0.7em 0 0 0;
+		margin:0em;
+	}
+	.main_screen_4 .main-icon {
+		font-size:4em;
+
+	}
+	.main_screen_4 .main-icon  i {
+		font-size:2em;
+	}
+	.main_screen_4 h3 {
+		font-size:2.6em;
+		margin-top:0em;
+	}
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+
+	#mainMenu ul.navbar-nav {
+		text-align: left;
+		margin-top: 1.2em;
+		padding: 0.5em;
+		margin-left: 0;
+		margin-top:3.1em;
+		background-color: #ffffff;
+	}
+	#mainMenu ul.navbar-nav a.nav-link {
+		margin:0;
+		padding:0.1em 0;
+	}
+	.first_screen_home h1{
+		font-size:2.7em;
+		padding:1.2em 0 0 0;
+		margin:0em;
+	}
+	.main_screen_4 .main-icon {
+		font-size:4em;
+
+	}
+	.main_screen_4 .main-icon  i {
+		font-size:1.5em;
+	}
+	.main_screen_4 h3 {
+		font-size:2em;
+		margin-top:0em;
+	}
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+
+}
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}

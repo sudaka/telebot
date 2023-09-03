@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block title %}Начальная страница{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row text-center">
+    <h4>Добро пожаловать в панель управления чат-ботом "Купидон"</h4>
+  </div>
+  {% if user.is_authenticated %}
+  {% else %}
+  <div class="row text-center">
+    <h4>Для продолжения работы пожалуйста авторизуйтесь.</h4>
+  </div>
+  {% endif %}
+</div>
+
+
+{% endblock %}

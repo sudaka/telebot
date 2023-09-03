@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% load icon %}
+{% block title %}Карты{% endblock %}
+{% block content %}
+    {% if user.is_staff %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-1 text-start">
+                    <h3>Карты</h3>
+                </div>
+                <div class="col-2 text-start">
+                    <a href="{% url 'card_create' %}" class="btn btn-primary ml-2">Создать карту</a>
+                </div>
+                <div class="col-9 text-start"></div>
+            </div>
+            <div class="row bg-secondary">
+                <div class="col-2 border text-light">Колода</div>
+                <div class="col border text-light">Отображаемый номер</div>
+                <div class="col border text-light">Текст или путь к файлу</div>
+                <div class="col-1 border text-light"></div>
+            </div>
+            {% for card in cards %}
+                <div class="row">
+                    <div class="col-2 border bg-secondary-subtle">{{ card.pack }}</div>
+                    <div class="col border bg-secondary-subtle">{{ card.number }}</div>
+                    <div class="col border bg-secondary-subtle">{{ card.cardtext }}</div>
+                    <div class="col-1 border bg-secondary-subtle">
+                        <a href="{% url 'card_edit' card.pk %}">{% icon "edit-3" %}</a>
+                        <a href="{% url 'card_del' card.pk %}" title="Удалить карту">{% icon "trash" %}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="container-fluid">
+            <div class="row bg-danger">Доступ к данной странице запрещен. Пожалуйста обратитесь к администратору для получения доступа.</div>
+        </div>
+    {% endif %}
+{% endblock %}
