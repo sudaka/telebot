@@ -86,9 +86,13 @@ class ChatUserInterface():
                 else:
                     pcards = self.getpaginated(cards)
                     if curpag not in pcards.keys():
-                        pagpcards = pcards.keys()[0]
+                        pagpcardsone = list(pcards.keys())
+                        pagpcards = pcards[pagpcardsone[0]]
                     else:
                         pagpcards = pcards[curpag]
+                        print('Нажатый номер', curpag)
+                        print('List: ', pagpcards)
+                    print('Набор карт: ', pagpcards)
                     for card in pagpcards:
                         currow.append(InlineKeyboardButton(card.number, callback_data=str(card.number)))
                         if len(currow) >= curset.cardsinrow:
@@ -159,5 +163,5 @@ class ChatUserInterface():
         except models.Chatusers.DoesNotExist:
             chatusr = None
         if chatusr:
-            cstep = chatusr.curstep
+            cstep = chatusr.curstep.name
         return cstep
