@@ -12,6 +12,7 @@ class Config():
     def __init__(self):
         self.token = '6682619083:AAFYodFdpjMoh6fsRxg6JNXUbSNrLk9NhkI'
         self.superuserchatid = '435177751'
+        self.paginatecount = 50
         self.packinrow = 1
         self.cardsinrow = 8
         self.hellonewuser = '''
@@ -56,7 +57,7 @@ class ChatUserInterface():
             markup.add(InlineKeyboardButton(pack.name, callback_data=str(pack.name)))
         return markup
     
-    def createcardmarkup(self, chatid, packname):
+    def createcardmarkup(self, chatid, packname, curpag = ''):
         curset = Config()
         markup = InlineKeyboardMarkup()
         markup.row_width = curset.cardsinrow
@@ -74,13 +75,29 @@ class ChatUserInterface():
                 chatusr.save()
                 cards = models.Card.objects.filter(pack = packobj)
                 currow = []
-                for card in cards:
-                    currow.append(InlineKeyboardButton(card.number, callback_data=str(card.number)))
-                    if len(currow) >= curset.cardsinrow:
+                if len(cards) < curset.paginatecount:
+                    for card in cards:
+                        currow.append(InlineKeyboardButton(card.number, callback_data=str(card.number)))
+                        if len(currow) >= curset.cardsinrow:
+                            markup.row(*currow)
+                            currow = []
+                    if len(currow) > 0:
                         markup.row(*currow)
-                        currow = []
-                if len(currow) > 0:
-                    markup.row(*currow)
+                else:
+                    pcards = self.getpaginated(cards)
+                    if curpag not in pcards.keys():
+                        pagpcards = pcards.keys()[0]
+                    else:
+                        pagpcards = pcards[curpag]
+                    for card in pagpcards:
+                        currow.append(InlineKeyboardButton(card.number, callback_data=str(card.number)))
+                        if len(currow) >= curset.cardsinrow:
+                            markup.row(*currow)
+                            currow = []
+                    if len(currow) > 0:
+                        markup.row(*currow)
+                    for pnames in pcards.keys():
+                        markup.row(InlineKeyboardButton(pnames, callback_data=pnames))
                 markup.row(InlineKeyboardButton('Назад', callback_data='Назад'))
         return markup
     
@@ -118,3 +135,29 @@ class ChatUserInterface():
             if curpack.packtype == 'IMG':
                 return True
         return False
+    
+    def getpaginated(self, lst):
+        curset = Config()
+        countpaginate = curset.paginatecount
+        lcount = len(lst)
+        abscount = lcount // countpaginate
+        newpaglist = {}
+        for m in range(abscount):
+            paglist = lst[m*countpaginate:(m+1)*countpaginate]
+            tmpkey = f'#{m*countpaginate}-{(m+1)*countpaginate}'
+            newpaglist[tmpkey] = paglist
+        lastpag = []
+        lastpag = lst[abscount*countpaginate:]
+        tmpkey = f'#{abscount*countpaginate}-{lcount}'
+        newpaglist[tmpkey] = lastpag
+        return newpaglist
+    
+    def getcurstep(self, chatid):
+        cstep = None
+        try:
+            chatusr = models.Chatusers.objects.get(chatid=chatid)
+        except models.Chatusers.DoesNotExist:
+            chatusr = None
+        if chatusr:
+            cstep = chatusr.curstep
+        return cstep
