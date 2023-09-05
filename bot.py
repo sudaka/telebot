@@ -45,7 +45,7 @@ def callback_query(call):
         gamebot.send_message(call.from_user.id, curconfig.packmessage, reply_markup=mkp)
     elif re.search(r'^#\d+-\d+$', call.data):
         try:
-            gamebot.delete_message(message.chat.id, message.message_id)
+            gamebot.delete_message(call.chat.id, call.message_id)
         except:
             pass
         cstep = chatui.getcurstep(call.from_user.id)
