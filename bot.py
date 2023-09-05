@@ -2,6 +2,7 @@ import telebot
 from telebot import types
 from botdjangoint import Config
 from botdjangoint import ChatUserInterface
+import re
 
 curconfig = Config()
 chatui = ChatUserInterface()
