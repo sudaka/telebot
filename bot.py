@@ -44,10 +44,13 @@ def callback_query(call):
         chatui.gotopacklist(call.from_user.id)
         gamebot.send_message(call.from_user.id, curconfig.packmessage, reply_markup=mkp)
     elif re.search(r'^#\d+-\d+$', call.data):
+        try:
+            gamebot.delete_message(message.chat.id, message.message_id)
+        except:
+            pass
         cstep = chatui.getcurstep(call.from_user.id)
-        print('Step: ', cstep, 'Pagdata: ', call.data)
         mrkp = chatui.createcardmarkup(call.from_user.id, cstep, call.data)
-        gamebot.send_message(call.from_user.id, 'Выберите карту или перейдите на', reply_markup=mrkp)
+        gamebot.send_message(call.from_user.id, 'Выберите карту или перейдите на следующую страницу', reply_markup=mrkp)
     else:
         mrkp = chatui.createcardmarkup(call.from_user.id, call.data)
         gamebot.send_message(call.from_user.id, 'Выберите карту', reply_markup=mrkp)

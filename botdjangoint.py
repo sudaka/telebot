@@ -90,9 +90,6 @@ class ChatUserInterface():
                         pagpcards = pcards[pagpcardsone[0]]
                     else:
                         pagpcards = pcards[curpag]
-                        print('Нажатый номер', curpag)
-                        print('List: ', pagpcards)
-                    print('Набор карт: ', pagpcards)
                     for card in pagpcards:
                         currow.append(InlineKeyboardButton(card.number, callback_data=str(card.number)))
                         if len(currow) >= curset.cardsinrow:
