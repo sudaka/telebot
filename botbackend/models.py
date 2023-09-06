@@ -3,7 +3,7 @@ from django.urls import reverse
 
 class Chatusers(models.Model):
     chatid = models.TextField(verbose_name='Идентификатор чата')
-    name = models.CharField(max_length=100, verbose_name='Имя пользователя')
+    name = models.CharField(max_length=110, verbose_name='Имя пользователя')
     isactive = models.BooleanField(verbose_name='Запись активна', default=False)
     curstep = models.ForeignKey('Pack', verbose_name='Текущая колода', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True)
 
