@@ -30,6 +30,10 @@ def start(message):
         
 @gamebot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
+    try:
+        gamebot.delete_message(call.from_user.id, call.message.message_id)
+    except:
+        print('Imessageid:', call.message.message_id, 'Chatid:', call.from_user.id)
     if call.data == 'Назад':
         mkp = chatui.createpackmarkup()
         chatui.gotopacklist(call.from_user.id)
@@ -44,10 +48,6 @@ def callback_query(call):
         chatui.gotopacklist(call.from_user.id)
         gamebot.send_message(call.from_user.id, curconfig.packmessage, reply_markup=mkp)
     elif re.search(r'^#\d+-\d+$', call.data):
-        try:
-            gamebot.delete_message(call.chat.id, call.message_id)
-        except:
-            pass
         cstep = chatui.getcurstep(call.from_user.id)
         mrkp = chatui.createcardmarkup(call.from_user.id, cstep, call.data)
         gamebot.send_message(call.from_user.id, 'Выберите карту или перейдите на следующую страницу', reply_markup=mrkp)
