@@ -81,7 +81,7 @@ def all_messages(message):
         if message.chat.id == curconfig.superuserchatid:
             chid = df.group(2)
             if chatui.activateuser(chid):
-                gamebot.sendactivatemessage(chid)
+                sendactivatemessage(chid)
             else:
                 print('yohoho')
     else:
