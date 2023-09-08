@@ -62,6 +62,7 @@ def callback_query(call):
 
 @gamebot.message_handler(func=lambda message:True)
 def all_messages(message):
+    df = re.match(r'^(id:(\d+):Активировать)$', message.text)
     if message.text == 'Назад':
         mkp = chatui.createreplypackmarkup()
         chatui.gotopacklist(message.chat.id)
@@ -75,8 +76,7 @@ def all_messages(message):
         mkp = chatui.createreplypackmarkup()
         chatui.gotopacklist(message.chat.id)
         gamebot.send_message(message.chat.id, curconfig.packmessage, reply_markup=mkp)
-    elif (re.match(r'^(id:(\d+):Активировать)$', message.text) & (message.chat.id == curconfig.superuserchatid)):
-        df = re.match(r'^(id:(\d+):Активировать)$', message.text)
+    elif (len(df) > 0) and (message.chat.id == curconfig.superuserchatid):
         chatui.activateuser(df.group(1))
     else:
         mrkp = chatui.createreplymarkup(message.chat.id, message.text)
