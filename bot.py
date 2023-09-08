@@ -60,6 +60,7 @@ def callback_query(call):
     #call.data 
 '''   
 
+
 @gamebot.message_handler(func=lambda message:True)
 def all_messages(message):
     df = re.match(r'^(id:(\d+):Активировать)$', message.text)
