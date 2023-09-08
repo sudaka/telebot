@@ -77,7 +77,7 @@ def all_messages(message):
         mkp = chatui.createreplypackmarkup()
         chatui.gotopacklist(message.chat.id)
         gamebot.send_message(message.chat.id, curconfig.packmessage, reply_markup=mkp)
-    elif (len(df) > 0) and (message.chat.id == curconfig.superuserchatid):
+    elif (len(df.group(0)) > 0) and (message.chat.id == curconfig.superuserchatid):
         chatui.activateuser(df.group(1))
     else:
         mrkp = chatui.createreplymarkup(message.chat.id, message.text)
