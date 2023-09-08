@@ -25,7 +25,10 @@ def start(message):
         if chatui.addnewuser(curchatid, curname):
             gamebot.send_message(curchatid, curconfig.hellonewuser)
             mrk = chatui.createreplyadmingetaccessmarkup(curchatid)
-            gamebot.send_message(curconfig.superuserchatid, f'Добавлен новый клиент, нужно его активировать. Имя:{curname} ИД:{curchatid}', reply_markup=mrk)
+            gamebot.send_message(
+                curconfig.superuserchatid, 
+                f'Добавлен новый клиент, нужно его активировать. Имя:{curname} ИД:{curchatid}', 
+                reply_markup=mrk)
         else:
             gamebot.send_message(curconfig.superuserchatid, f'При добавлении нового клиента (имя:{curname} ИД:{curchatid}) произошла ошибка.')
 
