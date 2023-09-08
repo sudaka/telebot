@@ -25,6 +25,7 @@ def start(message):
         if chatui.addnewuser(curchatid, curname):
             gamebot.send_message(curchatid, curconfig.hellonewuser)
             mrk = chatui.createreplyadmingetaccessmarkup(curchatid)
+            mrk = telebot.types.ReplyKeyboardRemove()
             gamebot.send_message(
                 curconfig.superuserchatid, 
                 f'Добавлен новый клиент, нужно его активировать. Имя:{curname} ИД:{curchatid}', 
@@ -81,6 +82,7 @@ def all_messages(message):
         chatui.gotopacklist(message.chat.id)
         gamebot.send_message(message.chat.id, curconfig.packmessage, reply_markup=mkp)
     elif df:
+        print(message.chat.id)
         if message.chat.id == curconfig.superuserchatid:
             chid = df.group(2)
             if chatui.activateuser(chid):

@@ -1,6 +1,6 @@
 import os
 import django
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
 script_path = os.path.dirname(__file__)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cupidongame.settings')
@@ -104,7 +104,7 @@ class ChatUserInterface():
     
     def createreplyadmingetaccessmarkup(self, chat_id):
         curset = Config()
-        markup = ReplyKeyboardMarkup(row_width=curset.packinrow)
+        markup = ReplyKeyboardMarkup()
         markup.add(KeyboardButton(f'id:{chat_id}:Активировать'))
         markup.add(KeyboardButton('Назад'))
         return markup
