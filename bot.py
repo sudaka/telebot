@@ -25,7 +25,7 @@ def start(message):
         if chatui.addnewuser(curchatid, curname):
             gamebot.send_message(curchatid, curconfig.hellonewuser)
             mrk = chatui.createreplyadmingetaccessmarkup(curchatid)
-            mrk = telebot.types.ReplyKeyboardRemove()
+            #mrk = telebot.types.ReplyKeyboardRemove()
             gamebot.send_message(
                 curconfig.superuserchatid, 
                 f'Добавлен новый клиент, нужно его активировать. Имя:{curname} ИД:{curchatid}', 
