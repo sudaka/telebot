@@ -63,20 +63,20 @@ def callback_query(call):
 def all_messages(message):
     if message.text == 'Назад':
         mkp = chatui.createreplypackmarkup()
-        chatui.gotopacklist(message.from_user.id)
-        gamebot.send_message(message.from_user.id, curconfig.packmessage, reply_markup=mkp)
+        chatui.gotopacklist(message.chat.id)
+        gamebot.send_message(message.chat.id, curconfig.packmessage, reply_markup=mkp)
     elif str(message.text).isdigit():
-        cardtxt = chatui.getcarddata(message.from_user.id, message.text)
-        if chatui.iscardjpg(message.from_user.id):
-            gamebot.send_photo(message.from_user.id, str(cardtxt))
+        cardtxt = chatui.getcarddata(message.chat.id, message.text)
+        if chatui.iscardjpg(message.chat.id):
+            gamebot.send_photo(message.chat.id, str(cardtxt))
         else:
-            gamebot.send_message(message.from_user.id, cardtxt)
+            gamebot.send_message(message.chat.id, cardtxt)
         mkp = chatui.createreplypackmarkup()
-        chatui.gotopacklist(message.from_user.id)
-        gamebot.send_message(message.from_user.id, curconfig.packmessage, reply_markup=mkp)
+        chatui.gotopacklist(message.chat.id)
+        gamebot.send_message(message.chat.id, curconfig.packmessage, reply_markup=mkp)
     else:
-        mrkp = chatui.createreplymarkup(message.from_user.id, message.text)
-        gamebot.send_message(message.from_user.id, 'Выберите карту', reply_markup=mrkp)
+        mrkp = chatui.createreplymarkup(message.chat.id, message.text)
+        gamebot.send_message(message.chat.id, 'Выберите карту', reply_markup=mrkp)
 
 if __name__ == '__main__':
     gamebot.infinity_polling()
