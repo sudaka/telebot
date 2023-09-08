@@ -79,7 +79,11 @@ def all_messages(message):
         gamebot.send_message(message.chat.id, curconfig.packmessage, reply_markup=mkp)
     elif df:
         if message.chat.id == curconfig.superuserchatid:
-            chatui.activateuser(df.group(2))
+            chid = df.group(2)
+            if chatui.activateuser(chid):
+                gamebot.sendactivatemessage(chid)
+            else:
+                print('yohoho')
     else:
         mrkp = chatui.createreplymarkup(message.chat.id, message.text)
         gamebot.send_message(message.chat.id, 'Выберите карту', reply_markup=mrkp)
