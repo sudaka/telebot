@@ -113,6 +113,7 @@ class ChatUserInterface():
         res = True
         try:
             activateduser = models.Chatusers.objects.filter(chatid = chat_id)
+            print(activateduser)
             activateduser.isactive = True
             activateduser.save()
         except:

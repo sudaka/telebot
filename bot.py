@@ -82,7 +82,6 @@ def all_messages(message):
         chatui.gotopacklist(message.chat.id)
         gamebot.send_message(message.chat.id, curconfig.packmessage, reply_markup=mkp)
     elif df:
-        print(message.chat.id)
         if str(message.chat.id) == curconfig.superuserchatid:
             chid = df.group(2)
             if chatui.activateuser(chid):
