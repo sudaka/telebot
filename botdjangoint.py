@@ -14,7 +14,7 @@ class Config():
         self.superuserchatid = '435177751'
         self.paginatecount = 50
         self.packinrow = 1
-        self.cardsinrow = 8
+        self.cardsinrow = 5
         self.hellonewuser = '''
         Добро пожаловать! Запрос на предоставление доступа направлен. Ожидайте подтверждение доступа.
         '''
