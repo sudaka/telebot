@@ -27,7 +27,8 @@ def start(message):
             gamebot.send_message(curconfig.superuserchatid, f'Добавлен новый клиент. Имя:{curname} ИД:{curchatid}')
         else:
             gamebot.send_message(curconfig.superuserchatid, f'При добавлении нового клиента (имя:{curname} ИД:{curchatid}) произошла ошибка.')
-        
+
+'''
 @gamebot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
     try:
@@ -55,7 +56,27 @@ def callback_query(call):
         mrkp = chatui.createcardmarkup(call.from_user.id, call.data)
         gamebot.send_message(call.from_user.id, 'Выберите карту', reply_markup=mrkp)
     #print(call.from_user.id)
-    #call.data    
+    #call.data 
+'''   
+
+@gamebot.message_handler(func=lambda message:True)
+def all_messages(message):
+    if message.text == 'Назад':
+        mkp = chatui.createreplypackmarkup()
+        chatui.gotopacklist(message.from_user.id)
+        gamebot.send_message(message.from_user.id, curconfig.packmessage, reply_markup=mkp)
+    elif str(message.text).isdigit():
+        cardtxt = chatui.getcarddata(message.from_user.id, message.text)
+        if chatui.iscardjpg(message.from_user.id):
+            gamebot.send_photo(message.from_user.id, str(cardtxt))
+        else:
+            gamebot.send_message(message.from_user.id, cardtxt)
+        mkp = chatui.createreplypackmarkup()
+        chatui.gotopacklist(message.from_user.id)
+        gamebot.send_message(message.from_user.id, curconfig.packmessage, reply_markup=mkp)
+    else:
+        mrkp = chatui.createreplymarkup(message.from_user.id, message.text)
+        gamebot.send_message(message.from_user.id, 'Выберите карту', reply_markup=mrkp)
 
 if __name__ == '__main__':
     gamebot.infinity_polling()

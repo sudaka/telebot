@@ -1,6 +1,6 @@
 import os
 import django
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 
 script_path = os.path.dirname(__file__)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cupidongame.settings')
@@ -102,6 +102,41 @@ class ChatUserInterface():
                 markup.row(InlineKeyboardButton('Назад', callback_data='Назад'))
         return markup
     
+    def createreplypackmarkup(self):
+        curset = Config()
+        markup = ReplyKeyboardMarkup(row_width=curset.packinrow)
+        packs = models.Pack.objects.all()
+        for pack in packs:
+            markup.add(KeyboardButton(pack.name))
+        return markup
+
+    def createreplymarkup(self, chatid, packname):
+        curset = Config()
+        markup = ReplyKeyboardMarkup(row_width=curset.cardsinrow)
+        try:
+            packobj = models.Pack.objects.get(name=packname)
+        except models.Pack.DoesNotExist:
+            packobj = None
+        if packobj:
+            try:
+                chatusr = models.Chatusers.objects.get(chatid=chatid)
+            except models.Chatusers.DoesNotExist:
+                chatusr = None
+            if chatusr:
+                chatusr.curstep = packobj
+                chatusr.save()
+                cards = models.Card.objects.filter(pack = packobj)
+                currow = []
+                for card in cards:
+                    currow.append(KeyboardButton(card.number))
+                    if len(currow) >= curset.cardsinrow:
+                        markup.add(*currow)
+                        currow = []
+                if len(currow) > 0:
+                    markup.add(*currow)
+                markup.row(KeyboardButton('Назад'))
+        return markup
+
     def gotopacklist(self, chatid):
         try:
             chatusr = models.Chatusers.objects.get(chatid=chatid)
