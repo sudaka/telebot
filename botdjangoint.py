@@ -102,6 +102,23 @@ class ChatUserInterface():
                 markup.row(InlineKeyboardButton('Назад', callback_data='Назад'))
         return markup
     
+    def createreplyadmingetaccessmarkup(self, chat_id):
+        curset = Config()
+        markup = ReplyKeyboardMarkup(row_width=curset.packinrow)
+        markup.add(KeyboardButton(f'id:{chat_id}:Активировать'))
+        markup.add(KeyboardButton('Назад'))
+        return markup
+    
+    def activateuser(self, chat_id):
+        res = True
+        try:
+            activateduser = models.Chatusers.objects.filter(chatid = chat_id)
+            activateduser.isactive = True
+            activateduser.save()
+        except:
+            res = False
+        return res
+            
     def createreplypackmarkup(self):
         curset = Config()
         markup = ReplyKeyboardMarkup(row_width=curset.packinrow)

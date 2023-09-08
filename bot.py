@@ -24,7 +24,8 @@ def start(message):
         curname = message.from_user.last_name
         if chatui.addnewuser(curchatid, curname):
             gamebot.send_message(curchatid, curconfig.hellonewuser)
-            gamebot.send_message(curconfig.superuserchatid, f'Добавлен новый клиент. Имя:{curname} ИД:{curchatid}')
+            mrk = chatui.createreplyadmingetaccessmarkup(curchatid)
+            gamebot.send_message(curconfig.superuserchatid, f'Добавлен новый клиент, нужно его активировать. Имя:{curname} ИД:{curchatid}', reply_markup=mrk)
         else:
             gamebot.send_message(curconfig.superuserchatid, f'При добавлении нового клиента (имя:{curname} ИД:{curchatid}) произошла ошибка.')
 
@@ -74,6 +75,9 @@ def all_messages(message):
         mkp = chatui.createreplypackmarkup()
         chatui.gotopacklist(message.chat.id)
         gamebot.send_message(message.chat.id, curconfig.packmessage, reply_markup=mkp)
+    elif (re.match(r'^(id:(\d+):Активировать)$', message.text) & (message.chat.id == curconfig.superuserchatid)):
+        df = re.match(r'^(id:(\d+):Активировать)$', message.text)
+        chatui.activateuser(df.group(1))
     else:
         mrkp = chatui.createreplymarkup(message.chat.id, message.text)
         gamebot.send_message(message.chat.id, 'Выберите карту', reply_markup=mrkp)
