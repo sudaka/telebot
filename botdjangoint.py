@@ -116,9 +116,7 @@ class ChatUserInterface():
             if activateduser:
                 activateduser[0].isactive = True
                 activateduser[0].save()
-            print(f'User {activateduser} activating and saving.')
         except Exception as e:
-            print(e)
             res = False
         return res
             
