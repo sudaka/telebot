@@ -113,9 +113,9 @@ class ChatUserInterface():
         res = True
         try:
             activateduser = models.Chatusers.objects.filter(chatid = chat_id)
-            print(activateduser)
-            activateduser.isactive = True
-            activateduser.save()
+            if activateduser:
+                activateduser[0].isactive = True
+                activateduser[0].save()
             print(f'User {activateduser} activating and saving.')
         except Exception as e:
             print(e)
