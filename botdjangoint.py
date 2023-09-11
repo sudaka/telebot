@@ -11,7 +11,7 @@ from botbackend import models
 class Config():
     def __init__(self):
         self.token = '6682619083:AAFYodFdpjMoh6fsRxg6JNXUbSNrLk9NhkI'
-        self.superuserchatid = '435177751'
+        self.superuserchatid = '2015779852'# '435177751'
         self.paginatecount = 50
         self.packinrow = 1
         self.cardsinrow = 5
