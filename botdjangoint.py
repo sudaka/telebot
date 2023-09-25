@@ -197,7 +197,7 @@ class ChatUserInterface():
             chatusr = None
         if chatusr:
             curpack = chatusr.curstep
-            if curpack.packtype == 'CTI':
+            if curpack.packtype == models.Pack.Packtypes.CTJ:
                 return True
         return False
     
