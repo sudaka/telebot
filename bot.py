@@ -84,7 +84,7 @@ def all_messages(message):
             textpercent = cursettings.PAGEN_SQUAREFORTEXT
             font = cursettings.PAGEN_FONTFILE
             txtimg = Multiline(str(cardtxt))
-            curfname = txtimg.createfilename(f'{imgdir}{background}', f'{imgdir}{font}', {textpercent})
+            curfname = txtimg.createfilename(f'{background}', f'{font}', {textpercent})
             if len(curfname) > 1:
                 gamebot.send_photo(message.chat.id, curfname)
         else:
