@@ -88,7 +88,10 @@ def all_messages(message):
             curfname = txtimg.createfilename(background, font, textpercent)
             if len(curfname) > 1:
                 fullpath = os.path.join(imgdir, f'{curfname}_{background}')
-                gamebot.send_photo(message.chat.id, fullpath)
+                if txtimg.checkfilebyname(fullpath):
+                    gamebot.send_photo(message.chat.id, fullpath)
+                else:
+                    gamebot.send_message(message.chat.id, fullpath)
         else:
             gamebot.send_message(message.chat.id, cardtxt)
         mkp = chatui.createreplypackmarkup()
