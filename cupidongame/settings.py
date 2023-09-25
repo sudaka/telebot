@@ -134,3 +134,4 @@ PAGEN_BACKGROUND_ROOT = os.path.join(BASE_DIR, 'collectstatic', 'messages', '')
 PAGEN_BACKGROUND_FILE = 'background.png'
 PAGEN_SQUAREFORTEXT = 0.6
 PAGEN_FONTFILE = 'gabriola.ttf'
+PAGEN_URL = 'http://gymalena.fvds.ru/static/messages/'

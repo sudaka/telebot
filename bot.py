@@ -85,13 +85,14 @@ def all_messages(message):
             textpercent = cursettings.PAGEN_SQUAREFORTEXT
             font = cursettings.PAGEN_FONTFILE
             txtimg = Multiline(str(cardtxt))
+            httpurl = cursettings.PAGEN_URL
             curfname = txtimg.createfilename(background, font, textpercent)
             if len(curfname) > 1:
                 fullpath = os.path.join(imgdir, f'{curfname}_{background}')
                 if txtimg.checkfilebyname(fullpath):
-                    gamebot.send_photo(message.chat.id, str(fullpath))
+                    gamebot.send_photo(message.chat.id, str(f'{httpurl}{curfname}_{background}'))
                 else:
-                    gamebot.send_message(message.chat.id, fullpath)
+                    gamebot.send_message(message.chat.id, 'Ошибка получения файла изображения')
         else:
             gamebot.send_message(message.chat.id, cardtxt)
         mkp = chatui.createreplypackmarkup()
