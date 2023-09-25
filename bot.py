@@ -3,6 +3,8 @@ from telebot import types
 from botdjangoint import Config
 from botdjangoint import ChatUserInterface
 import re
+from imgcreator import Multiline
+from cupidongame import settings as cursettings
 
 curconfig = Config()
 chatui = ChatUserInterface()
@@ -76,6 +78,15 @@ def all_messages(message):
         cardtxt = chatui.getcarddata(message.chat.id, message.text)
         if chatui.iscardjpg(message.chat.id):
             gamebot.send_photo(message.chat.id, str(cardtxt))
+        elif chatui.iscardcreatingjpg(message.chat.id):
+            imgdir = cursettings.PAGEN_BACKGROUND_ROOT
+            background = cursettings.PAGEN_BACKGROUND_FILE
+            textpercent = cursettings.PAGEN_SQUAREFORTEXT
+            font = cursettings.PAGEN_FONTFILE
+            txtimg = Multiline(str(cardtxt))
+            curfname = txtimg.createfilename(f'{imgdir}{background}', f'{imgdir}{font}', {textpercent})
+            if len(curfname) > 1:
+                gamebot.send_photo(message.chat.id, curfname)
         else:
             gamebot.send_message(message.chat.id, cardtxt)
         mkp = chatui.createreplypackmarkup()

@@ -23,6 +23,7 @@ class Pack(models.Model):
     class Packtypes(models.TextChoices):
         TXT = 'TXT', 'Текстовая колода'
         IMG = 'IMG', 'Колода с рисунками'
+        CTJ = 'CTJ', 'Текстовая колода, формирующая рисунок'
 
     order = models.IntegerField(verbose_name='Номер вывода')
     name = models.CharField(max_length=50, verbose_name='Имя колоды', unique=True)

@@ -19,6 +19,8 @@ def showleftmenu(context):
     curleftmenu.append(menu)
     menu = MenuItem('Список карт', reverse('card_list_all'), newwindow=False, is_staff=True)
     curleftmenu.append(menu)
+    menu = MenuItem('Генерируемые карты', reverse('messages_pagenerator'), newwindow=False, is_staff=True)
+    curleftmenu.append(menu)
     menu = MenuItem('Список клиентов бота', reverse('chatuser_list'), newwindow=False, is_staff=True)
     curleftmenu.append(menu)
     menu = MenuItem('АДМИНИСТРИРОВАНИЕ СЕРВЕРА', menulink='#', newwindow=False, is_staff=True)

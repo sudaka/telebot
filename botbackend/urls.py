@@ -17,4 +17,6 @@ urlpatterns = [
     path('chatusers/list/', views.chatuserlist, name='chatuser_list'),
     path('chatuser/<int:pk>/activate/', views.chatuseractivate, name='chatuser_activate'),
     path('chatuser/<int:pk>/deactivate/', views.chatuserdeactivate, name='chatuser_deactivate'),
+    path('messages/showparams/', views.pagenerator , name='messages_pagenerator'),
+    path('messages/create/', views.generateimg , name='messages_createimg'),
 ]

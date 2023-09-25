@@ -190,6 +190,17 @@ class ChatUserInterface():
                 return True
         return False
     
+    def iscardcreatingjpg(self, chatid):
+        try:
+            chatusr = models.Chatusers.objects.get(chatid=chatid)
+        except models.Chatusers.DoesNotExist:
+            chatusr = None
+        if chatusr:
+            curpack = chatusr.curstep
+            if curpack.packtype == 'CTJ':
+                return True
+        return False
+    
     def getpaginated(self, lst):
         curset = Config()
         countpaginate = curset.paginatecount

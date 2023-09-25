@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% load icon %}
+{% block title %}Параметры генерации сообщений{% endblock %}
+{% block content %}
+    {% if user.is_staff %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 text-start">
+                    <h3>Параметры генерации сообщений</h3>
+                </div>
+                <div class="col-2 text-start">
+                    
+                </div>
+                <div class="col-7 text-start"></div>
+            </div>
+
+            {% for pname, pvalue in pagenparams.items %}
+            <div class = "row">
+                <div class="col-4 border bg-secondary-subtle">{{pname}}</div>
+                <div class="col border bg-secondary-subtle">{{pvalue}}</div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-6 text-start">
+                    <h3>Операции</h3>
+                </div>
+                <div class="col-2 text-start">
+                    
+                </div>
+                <div class="col-7 text-start"></div>
+            </div>
+            <div class = "row">
+                <div class="col-4"><a class="btn btn-primary" href="{% url 'messages_createimg' %}" role="button">
+                    Сформировать изображения на основе текста
+                    </a>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid">
+            <div class="row bg-danger">Доступ к данной странице запрещен. Пожалуйста обратитесь к администратору для получения доступа.</div>
+        </div>
+    {% endif %}
+{% endblock %}

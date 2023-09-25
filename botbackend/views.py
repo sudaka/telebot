@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Pack, Card, Steplist, Chatusers
 from django.urls import reverse_lazy
 import bot
+import cupidongame.settings as cursettings
+import imgcreator
+import os
 
 @login_required
 def packlist(request):
@@ -91,3 +94,34 @@ def chatuserdeactivate(request, pk):
     activateduser.isactive = False
     activateduser.save()
     return redirect('chatuser_list')
+
+@login_required
+def pagenerator(request):
+    pagenparams = {}
+    pagenparams['Директория хранения изображений'] = cursettings.PAGEN_BACKGROUND_ROOT
+    pagenparams['Файл фона изображений'] = cursettings.PAGEN_BACKGROUND_FILE
+    pagenparams['Процент заполнения текстом'] = cursettings.PAGEN_SQUAREFORTEXT
+    pagenparams['Файл шрифта'] = cursettings.PAGEN_FONTFILE
+    return render(request, 'messages.html', {"pagenparams" : pagenparams})
+
+@login_required
+def generateimg(request):
+    imgdir = cursettings.PAGEN_BACKGROUND_ROOT
+    backimg = cursettings.PAGEN_BACKGROUND_FILE
+    textpercent = cursettings.PAGEN_SQUAREFORTEXT
+    fontfile = cursettings.PAGEN_FONTFILE
+    packs = Pack.objects.filter(packtype__exact=Pack.Packtypes.CTJ)
+    for curpack in packs:
+        cards = Card.objects.filter(pack__exact=curpack)
+        for card in cards:
+            m = imgcreator.Multiline(card.cardtext)
+            genfname = m.createfilename(backimg, fontfile, textpercent)
+            fullpath = os.path.join(imgdir, f'{genfname}_{backimg}')
+            if m.checkfilebyname(fullpath):
+                continue
+            else:
+                try:
+                    m.createjpgmessage(backimg, fontfile, textpercent, imgdir)
+                except Exception as e:
+                    pass
+    return render(request, 'messagefinish.html')

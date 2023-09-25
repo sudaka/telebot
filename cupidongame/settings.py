@@ -129,3 +129,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+PAGEN_BACKGROUND_ROOT = os.path.join(BASE_DIR, 'collectstatic', 'messages', '')
+PAGEN_BACKGROUND_FILE = 'background.png'
+PAGEN_SQUAREFORTEXT = 0.6
+PAGEN_FONTFILE = 'gabriola.ttf'
