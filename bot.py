@@ -5,6 +5,7 @@ from botdjangoint import ChatUserInterface
 import re
 from imgcreator import Multiline
 from cupidongame import settings as cursettings
+import os
 
 curconfig = Config()
 chatui = ChatUserInterface()
@@ -84,9 +85,10 @@ def all_messages(message):
             textpercent = cursettings.PAGEN_SQUAREFORTEXT
             font = cursettings.PAGEN_FONTFILE
             txtimg = Multiline(str(cardtxt))
-            curfname = txtimg.createfilename(f'{background}', f'{font}', {textpercent})
+            curfname = txtimg.createfilename(background, font, textpercent)
             if len(curfname) > 1:
-                gamebot.send_photo(message.chat.id, curfname)
+                fullpath = os.path.join(imgdir, f'{curfname}_{background}')
+                gamebot.send_photo(message.chat.id, fullpath)
         else:
             gamebot.send_message(message.chat.id, cardtxt)
         mkp = chatui.createreplypackmarkup()
