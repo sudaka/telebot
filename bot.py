@@ -89,7 +89,6 @@ def all_messages(message):
             curfname = txtimg.createfilename(background, font, textpercent)
             if len(curfname) > 1:
                 fullpath = os.path.join(imgdir, f'{curfname}_{background}')
-                print(fullpath)
                 if txtimg.checkfilebyname(fullpath):
                     gamebot.send_photo(message.chat.id, str(f'{httpurl}{curfname}_{background}'))
                 else:
